@@ -1,0 +1,43 @@
+version = 1
+
+# 既存のロガーを無効にするかどうか
+disable_existing_loggers = false
+
+# フォーマッタの設定
+[formatters.JSTFormatter]
+format = '%(asctime)s (JST) [%(levelname)-7s] (%(filename)-20s) (%(funcName)-20s) %(message)s'
+datefmt = '%Y/%m/%d %H:%M:%S'
+
+# コンソールハンドラの設定
+[handlers.console]
+class = 'logging.StreamHandler'
+formatter = 'JSTFormatter'
+stream = 'ext://sys.stdout'
+
+# ファイルハンドラの設定（カスタムハンドラを使用）
+[handlers.file]
+class = 'log.CompressedTimedRotatingFileHandler'
+when = 'D'  # 日次でローテーション
+backupCount = 120  # 120日分のバックアップを保持
+level = 'INFO'
+formatter = 'JSTFormatter'
+encoding = 'utf-8'
+filename = '../log/subnet.log'
+
+# コンソールロガーの設定
+[loggers.console]
+level = 'INFO'
+handlers = [ 'console' ]
+propagate = 'no'
+
+# ファイルロガーの設定
+[loggers.file]
+level = 'INFO'
+handlers = [ 'file' ]
+propagate = 'no'
+
+# 両方のハンドラを使用するロガーの設定
+[loggers.cf]
+level = 'INFO'
+handlers = [ 'console', 'file' ]
+propagate = 'no'

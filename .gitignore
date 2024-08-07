@@ -1,0 +1,12 @@
+/bin/
+/include/
+/lib/
+*pyenv.cfg
+*pyvenv.cfg
+/**/__pycache__/
+/lib64/
+/**/*.log
+/**/*.gz
+/**/*.env
+/lib64/*
+/**/*lib64/*
